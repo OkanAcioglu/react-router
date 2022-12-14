@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Products from './pages/Products'
+import Error from './pages/Error'
 //? We can also pass the component directly instead of hardcoding.
 //? Whatever we have in the component will be the content of the page.
 
@@ -16,8 +17,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='about' element={<About />} />
-        <Route path='products' element={<Products />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/products' element={<Products />} />
+        {/* moment that if a user by mistake types a path that does not exist app will display nothing. In order to handle this we setup a error page. We will use "*" that is if the app cannot find anythink related to other pages, then this will collect all of them  */}
+        <Route path='/*' element={<Error />} />
       </Routes>
     </BrowserRouter>
   )
