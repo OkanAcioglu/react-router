@@ -27,3 +27,19 @@ function App() {
 }
 
 export default App
+
+// eslint-disable-next-line no-lone-blocks
+{
+  /* <BrowserRouter>
+  !Most basic approach of navbar and footer setup that shared layout
+      <nav>our navbar</nav>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/products' element={<Products />} />
+        moment that if a user by mistake types a path that does not exist app will display nothing. In order to handle this we setup a error page. We will use "*" that is if the app cannot find anythink related to other pages, then this will collect all of them 
+        <Route path='/*' element={<Error />} />
+      </Routes>
+        <footer>our footer</footer>
+    </BrowserRouter> */
+}
