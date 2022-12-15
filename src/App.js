@@ -1,14 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+import { useState } from 'react'
 import Home from './pages/Home'
 import About from './pages/About'
 import Products from './pages/Products'
 import Error from './pages/Error'
 import SharedLayout from './pages/SharedLayout'
 import SingleProduct from './pages/SingleProduct'
-//! Imagine a product page where we display a bunch of products and once we click on that specific product we display it in a separate page but we dont wanna setup a separate page for every product that we have
-//! In order to setup URL Parameters we go with the colon (:) and then the whatever the parameter name
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+
 function App() {
+  //! set useState for users
+  //! pass the setUser function to Login via props
+  //! pass the user to Dashboard via props
+  const [user, setUser] = useState(null)
   return (
     <BrowserRouter>
       <Routes>
@@ -17,6 +22,8 @@ function App() {
           <Route path='about' element={<About />} />
           <Route path='products' element={<Products />} />
           <Route path='products/:productId' element={<SingleProduct />} />
+          <Route path='login' element={<Login setUser={setUser} />} />
+          <Route path='dashboard' element={<Dashboard user={user} />} />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>

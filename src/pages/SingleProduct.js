@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import products from '../data'
 const SingleProduct = () => {
-  const { productId } = useParams() //! Should be the same in the path in the App.js
+  const { productId } = useParams()
   const product = products.find((product) => product.id === productId)
   const { image, name } = product
   return (
