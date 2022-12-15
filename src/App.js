@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Products from './pages/Products'
 import Error from './pages/Error'
+import SharedLayout from './pages/SharedLayout'
 //? We can also pass the component directly instead of hardcoding.
 //? Whatever we have in the component will be the content of the page.
 
@@ -16,10 +17,14 @@ function App() {
   //! If we want to nest some routes inside of another we need to go with parent route and decide which routes we wanna setup in there.
   //! Key point when nesting routes where whatever we have here as a parent will be the main route and whatever is inside is going to be "/" + whatever path is over here.
   //! Problem is when we go to the ..URL/about we only see the homepage. To fix this we need use outlet inside of the Home component.
+
+  //* If we have the nested routes for the main one for the parent we can setup "index" route.
+  //* index prop allows us to match whatever we have for the parent path
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home />}>
+        <Route path='/' element={<SharedLayout />}>
+          <Route index element={<Home />} />
           <Route path='about' element={<About />} />
           <Route path='products' element={<Products />} />
           <Route path='*' element={<Error />} />
