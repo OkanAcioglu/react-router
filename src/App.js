@@ -13,33 +13,20 @@ import Error from './pages/Error'
 //? Whatever we have in the component will be the content of the page.
 
 function App() {
+  //! If we want to nest some routes inside of another we need to go with parent route and decide which routes we wanna setup in there.
+  //! Key point when nesting routes where whatever we have here as a parent will be the main route and whatever is inside is going to be "/" + whatever path is over here.
+  //! Problem is when we go to the ..URL/about we only see the homepage. To fix this we need use outlet inside of the Home component.
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/products' element={<Products />} />
-        {/* moment that if a user by mistake types a path that does not exist app will display nothing. In order to handle this we setup a error page. We will use "*" that is if the app cannot find anythink related to other pages, then this will collect all of them  */}
-        <Route path='/*' element={<Error />} />
+        <Route path='/' element={<Home />}>
+          <Route path='about' element={<About />} />
+          <Route path='products' element={<Products />} />
+          <Route path='*' element={<Error />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
 }
 
 export default App
-
-// eslint-disable-next-line no-lone-blocks
-{
-  /* <BrowserRouter>
-  !Most basic approach of navbar and footer setup that shared layout
-      <nav>our navbar</nav>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/products' element={<Products />} />
-        moment that if a user by mistake types a path that does not exist app will display nothing. In order to handle this we setup a error page. We will use "*" that is if the app cannot find anythink related to other pages, then this will collect all of them 
-        <Route path='/*' element={<Error />} />
-      </Routes>
-        <footer>our footer</footer>
-    </BrowserRouter> */
-}
