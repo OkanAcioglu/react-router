@@ -9,6 +9,7 @@ import SingleProduct from './pages/SingleProduct'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './pages/ProtectedRoute'
+import SharedProductLayout from './pages/SharedProductLayout'
 function App() {
   const [user, setUser] = useState(null)
   return (
@@ -17,13 +18,14 @@ function App() {
         <Route path='/' element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path='about' element={<About />} />
-          <Route path='products' element={<Products />} />
-          <Route path='products/:productId' element={<SingleProduct />} />
+          {/* Functionality did not changed we only use nested routes approach */}
+          <Route path='products' element={<SharedProductLayout />}>
+            <Route index element={<Products />} />
+            <Route path=':productId' element={<SingleProduct />} />
+          </Route>
           <Route path='login' element={<Login setUser={setUser} />} />
           <Route
             path='dashboard'
-            //! We wanna restrict access to dashboard we will wrap dashboard with ProtectedRoute
-            //! We pass the user as a prop to the ProtectedRoute since we will need to check if the user exist only then we will display the dashboard
             element={
               <ProtectedRoute user={user}>
                 <Dashboard user={user} />
