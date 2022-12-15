@@ -8,11 +8,8 @@ import SharedLayout from './pages/SharedLayout'
 import SingleProduct from './pages/SingleProduct'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
-
+import ProtectedRoute from './pages/ProtectedRoute'
 function App() {
-  //! set useState for users
-  //! pass the setUser function to Login via props
-  //! pass the user to Dashboard via props
   const [user, setUser] = useState(null)
   return (
     <BrowserRouter>
@@ -23,7 +20,16 @@ function App() {
           <Route path='products' element={<Products />} />
           <Route path='products/:productId' element={<SingleProduct />} />
           <Route path='login' element={<Login setUser={setUser} />} />
-          <Route path='dashboard' element={<Dashboard user={user} />} />
+          <Route
+            path='dashboard'
+            //! We wanna restrict access to dashboard we will wrap dashboard with ProtectedRoute
+            //! We pass the user as a prop to the ProtectedRoute since we will need to check if the user exist only then we will display the dashboard
+            element={
+              <ProtectedRoute user={user}>
+                <Dashboard user={user} />
+              </ProtectedRoute>
+            }
+          />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>
